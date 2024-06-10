@@ -13,7 +13,7 @@ class Shoe
     int shoeYear[] = {};
     string shoeName[] = {};
     int instr;
-    vector<variant<string, int>> shoeCollection;
+    vector<Shoe> shoeCollection;
 };
 
 class addShoe
@@ -35,7 +35,10 @@ class dltShoe
 {
     if (instr == 2)
     {
-
+        string dltName;
+        string dltBrand;
+        string dltColor;
+        int dltYear;
     };
 };
 
@@ -43,7 +46,10 @@ class findShoe
 {
     if (instr == 3)
     {
-
+        string tempName;
+        string tempBrand;
+        string tempColor;
+        int tempYear;
     };
 };
 
