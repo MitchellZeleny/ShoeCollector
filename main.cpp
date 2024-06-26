@@ -59,6 +59,7 @@ class dltShoe
         cout << "Enter the name of your " << dltYear << " " << dltColor << " " << dltBrand << "'s: " << endl;
         getline(cin, dltName);
         int size = sizeof(shoeBrand) - 1;
+        
         for (int i = 0; i < size; i++)
         {
             if (shoeBrand[i] == dltBrand && shoeColor[i] == dltColor && shoeYear[i] == dltYear && shoeName[i] == dltName)
@@ -67,11 +68,13 @@ class dltShoe
                 shoeColor.remove(dltColor);
                 shoeYear.remove(dltYear);
                 shoeName.remove(dltName);
+                cout << "Your shoe has been deleted!" << endl;
             }
             else
             {
                 cout << "This shoe is not in your collection, add it!" << endl;
             }
+            i++;
         }
     }
 }
@@ -93,6 +96,33 @@ class findShoe
         cin >> tempYear;
         cout << "Enter the name of your " << tempYear << " " << tempColor << " " <<tempBrand << "'s: " << endl;
         getline(cin, tempName);
+        
+        for (int i = 0; i < size; i++)
+        {
+            if (shoeBrand[i] == tempBrand && shoeColor[i] == tempColor && shoeYear[i] == tempYear && shoeName[i] == tempName)
+            {
+                cout << "This shoe is already in your collection." << endl;
+            }
+            else
+            {
+                int answer;
+                cout << "Do you want to add this shoe to your collection?" << endl;
+                cout << "Enter 1 for yes or 2 for no." << endl;
+                cin >> answer;
+                if (answer == 1)
+                {
+                    shoeBrand.push_back(tempBrand);
+                    shoeColor.push_back(tempColor);
+                    shoeYear.push_back(tempYear);
+                    shoeName.push_back(tempName);
+                }
+                else
+                {
+                    cout << "This shoe will not be added to your collection." << endl;
+                }
+            }
+            i++;
+        }
     }
 }
 
@@ -104,7 +134,4 @@ int main()
     cout << "Eenter 2 to delete a shoe from your collection." << endl;
     cout << "Enter 3 to search for a shoe in your collection." << endl;
     cin >> instr;
-
-    
-    
 }
