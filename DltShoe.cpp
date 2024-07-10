@@ -1,8 +1,5 @@
-#include <string>
-#include <iostream>
-#include <vector>
 #include "ShoeClass.cpp"
-using namespace std;
+
 
 // Function to delete shoe from your collection
 class DltShoe
