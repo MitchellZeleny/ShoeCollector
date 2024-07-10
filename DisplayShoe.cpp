@@ -1,9 +1,5 @@
-#include <array>
-#include <string>
-#include <iostream>
-#include <vector>
 #include "ShoeClass.cpp"
-using namespace std;
+
 
 // Function to display your shoe collection in a neat format
 class DisplayShoe
