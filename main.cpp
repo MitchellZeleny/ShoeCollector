@@ -3,7 +3,7 @@
 #include "DltShoe.cpp"
 #include "FindShoe.cpp"
 #include "DisplayShoe.cpp"
-using namespace std;
+#include <vector>
 
 
 int main()
