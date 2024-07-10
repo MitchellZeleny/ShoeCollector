@@ -1,9 +1,5 @@
-#include <array>
-#include <string>
-#include <iostream>
-#include <vector>
 #include "ShoeClass.cpp"
-using namespace std;
+
 
 // Function to see if a shoe is already in your collection
 class FindShoe
