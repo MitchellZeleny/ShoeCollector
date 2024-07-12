@@ -28,19 +28,20 @@ int main()
     		string addBrand;
 		int addYear;
     		string addColor;
+		int arraySize = sizeof(shoeBrand);
 
 		cout << "Enter the brand of the shoe you want to add to your collection: " << endl;
     		getline(cin, addBrand);
-    		shoeBrand.push_back(addBrand);
+    		shoeBrand[arraySize] = addBrand;
     		cout << "Enter the primary color of your " << addBrand << " shoe: " << endl;
     		getline(cin, addColor);
-    		shoeColor.push_back(addColor);
+    		shoeColor[arraySize] = addColor;
     		cout << "Enter the numerical value of the year your " << addColor << " " << addBrand << "'s were made: " << endl;
     		cin >> addYear;
-    		shoeYear.push_back(addYear);
+    		shoeYear[arraySize] = addYear;
     		cout << "Enter the name of your " << addYear << " " << addColor << " " << addBrand << "'s: " << endl;
     		getline(cin, addName);
-    		shoeName.push_back(addName);
+    		shoeName[arraySize] = addName;
 	}
 	else if (instr == 2) 
 	{
@@ -49,10 +50,6 @@ int main()
     		string dltBrand;
     		string dltColor;
     		int dltYear;
-		string dltArrayName(string nameArr[], int n = 200, int w)
-		string dltArrayBrand(
-		int dltArrayYear(
-		string dltArrayColor(
 
 		cout << "Enter the brand of the shoe you want to delete from your collection: " << endl;
     		getline(cin, dltBrand);
@@ -70,7 +67,10 @@ int main()
         		if (shoeBrand[i] == dltBrand && shoeColor[i] == dltColor && shoeYear[i] == dltYear && shoeName[i] == dltName)
         		{
 
-            			
+            			shoeBrand.erase(dltBrand);
+				shoeName.erase(dltName);
+				shoeColor.erase(dltColor);
+				shoeYear.erase(dltYear);
             			cout << "Your shoe has been deleted!" << endl;
         		}
         		else
