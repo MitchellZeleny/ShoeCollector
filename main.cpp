@@ -123,6 +123,18 @@ int main()
     {
         cout << "Invalid input." << endl;
     }
+
+    string cont;
+    cout << "Do you need to perform more actions to your shoe collection?" << endl;
+    cout << "Enter 'yes' to continue, enter 0 to quit." << endl;
+    cin >> cont;
+
+    while (cont == "yes")
+    {
+
+        
+    }
+    
     return 0;
 }
 
