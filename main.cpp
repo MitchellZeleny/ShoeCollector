@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -8,11 +9,13 @@ using namespace std;
 int main()
 {
     // Create multiple vectors to store different shoes with multiple variables 
-    vector<string> shoeBrand;
-    vector<string> shoeColor;   
-    vector<int> shoeYear;
-    vector<string> shoeName; 
-    
+    struct shoeCollect
+    {
+        vector<string> shoeBrand;
+        vector<string> shoeColor;   
+        vector<int> shoeYear;
+        vector<string> shoeName; 
+    }
 
     // User input to adjust their shoe collection
     int instr;
@@ -20,6 +23,8 @@ int main()
     cout << "Eenter 2 to delete a shoe from your collection." << endl;
     cout << "Enter 3 to search for a shoe in your collection." << endl;
     cout << "Enter 4 to display your shoe collection." << endl;
+    cout << "Enter 5 to save your shoe collection to a file." << endl;
+    cout << "Enter 6 to open your shoe collection file." << endl;
     cin >> instr;
 
     if (instr == 1)
@@ -119,6 +124,48 @@ int main()
             cout << shoeBrand[i] << "\t" << shoeColor[i] << "\t" << shoeYear[i] << "\t" << shoeName[i] << endl;
         }
     }
+    else if (instr == 5)
+    {
+        void saveData(const shoeCollect& userData)
+        {
+            ofstream saveData("userdata.txt");
+            if (outData.is_open())
+            {
+                saveData << userData.shoeBrand << endl;
+                saveData << userData.shoeName << endl;
+                saveData << userData.shoeYear << endl;
+                saveData << userData.shoeColor << endl;
+                saveData.close();
+                cout << "Your shoe collection has been saved." << endl;
+            }
+            else
+            {
+                cout << "Unable to create a file to save your collection." << endl;
+            }
+        }
+    }
+    else if (instr == 6)
+    {
+        bool openFile(shoeCollect& userData)
+        {
+            ifstream openData("userdata.txt");
+            if (openData.is_open())
+            {
+                getine(openFile,userData.shoeBrand);
+                getine(openFile,userData.shoeName);
+                getine(openFile,userData.shoeColor);
+                openData >> userData.shoeYear;
+                openData.close();
+                cout << "Your shoe collection file has been opened." << endl;
+                return true;
+            }
+            else
+            {
+                cout << "No data found in file, create a shoe collection!" << endl;
+                return false;
+            }
+        }
+    }
     else
     {
         cout << "Invalid input." << endl;
@@ -135,6 +182,8 @@ int main()
         cout << "What action do you want to perform?" << endl;
         cout << "Enter 1 to add a shoe, 2 to delete a shoe, " << endl;
         cout << "3 to find a shoe, or 4 to display your shoe collection." << endl;
+        cout << "Enter 5 to save your shoe collection to a file." << endl;
+        cout << "Enter 6 to open your shoe collection file." << endl;
         cin >> action;
 
         if (action == 1)
@@ -235,10 +284,52 @@ int main()
             cout << "Enter 'yes' to continue or 0 to exit" << endl;
             cin >> cont
         }
-    else
-    {
-        cout << "Invalid input." << endl;
-    }
+        else if (action == 5)
+        {
+            void saveData(const shoeCollect& userData)
+            {
+                ofstream saveData("userdata.txt");
+                if (outData.is_open())
+                {
+                    saveData << userData.shoeBrand << endl;
+                    saveData << userData.shoeName << endl;
+                    saveData << userData.shoeYear << endl;
+                    saveData << userData.shoeColor << endl;
+                    saveData.close();
+                    cout << "Your shoe collection has been saved." << endl;
+                }
+                else
+                {
+                    cout << "Unable to create a file to save your collection." << endl;
+                }
+            } 
+        }
+        else if (action == 6)
+        {
+            bool openFile(shoeCollect& userData)
+            {
+                ifstream openData("userdata.txt");
+                if (openData.is_open())
+                {
+                    getine(openFile,userData.shoeBrand);
+                    getine(openFile,userData.shoeName);
+                    getine(openFile,userData.shoeColor);
+                    openData >> userData.shoeYear;
+                    openData.close();
+                    cout << "Your shoe collection file has been opened." << endl;
+                    return true;
+                }
+                else
+                {
+                    cout << "No data found in file, create a shoe collection!" << endl;
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            cout << "Invalid input." << endl;
+        }
     }
     
     return 0;
