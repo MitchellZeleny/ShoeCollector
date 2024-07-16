@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     // Create multiple vectors to store different shoes with multiple variables 
-    struct shoeCollect
+    class shoeCollect
     {
         vector<string> shoeBrand;
         vector<string> shoeColor;   
