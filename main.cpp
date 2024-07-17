@@ -88,20 +88,16 @@ int main()
         cout << "Enter the brand of the shoe you want to add to your collection: ";
         getline(cin, addBrand);
         collection.shoeBrand.push_back(addBrand);
-
         cout << "Enter the primary color of your " << addBrand << " shoe: ";
         getline(cin, addColor);
         collection.shoeColor.push_back(addColor);
-
         cout << "Enter the numerical value of the year your " << addColor << " " << addBrand << "'s were made: ";
         cin >> addYear;
         collection.shoeYear.push_back(addYear);
         cin.ignore(); // clear newline from input buffer
-
         cout << "Enter the name of your " << addYear << " " << addColor << " " << addBrand << "'s: ";
         getline(cin, addName);
         collection.shoeName.push_back(addName);
-
         cout << "Shoe added to collection!" << endl;
     }
     // Deleting a shoe from your collection 
