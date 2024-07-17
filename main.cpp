@@ -4,53 +4,110 @@
 #include <iostream>
 using namespace std;
 
+    // Create multiple vectors to store different shoes with multiple variables 
+class shoeCollect
+{
+    vector<string> shoeBrand;
+    vector<string> shoeColor;   
+    vector<int> shoeYear;
+    vector<string> shoeName; 
+};
 
+void saveData(const shoeCollect& userData)
+{
+    ofstream saveData("userdata.txt");
+    if (saveData.is_open())
+    {
+        for (size_t i = 0; i < userData.shoeBrand.size(); ++i)
+        {
+            saveData << userData.shoeBrand[i] << endl;
+            saveData << userData.shoeColor[i] << endl;
+            saveData << userData.shoeYear[i] << endl;
+            saveData << userData.shoeName[i] << endl;
+        }
+        saveData.close();
+        cout << "Your shoe collection has been saved." << endl;
+    }
+    else
+    {
+        cout << "Unable to create a file to save your collection." << endl;
+    }
+}
+
+bool openFile(shoeCollect& userData)
+{
+    ifstream openData("userdata.txt");
+    if (openData.is_open())
+    {
+        while (!openData.eof())
+        {
+            string brand, color, name;
+            int year;
+            getline(openData, brand);
+            getline(openData, color);
+            openData >> year;
+            openData.ignore();
+            getline(openData, name);
+
+            userData.shoeBrand.push_back(brand);
+            userData.shoeColor.push_back(color);
+            userData.shoeYear.push_back(year);
+            userData.shoeName.push_back(name);
+        }
+        openData.close();
+        cout << "Your shoe collection file has been opened." << endl;
+        return true;
+    }
+    else
+    {
+        cout << "No data found in file, create a shoe collection!" << endl;
+        return false;
+    }
+}
 
 int main()
 {
-    // Create multiple vectors to store different shoes with multiple variables 
-    class shoeCollect
-    {
-        vector<string> shoeBrand;
-        vector<string> shoeColor;   
-        vector<int> shoeYear;
-        vector<string> shoeName; 
-    }
+    shoeCollect collection;
 
-    // User input to adjust their shoe collection
     int instr;
     cout << "Enter 1 to add a shoe to your collection." << endl;
-    cout << "Eenter 2 to delete a shoe from your collection." << endl;
+    cout << "Enter 2 to delete a shoe from your collection." << endl;
     cout << "Enter 3 to search for a shoe in your collection." << endl;
     cout << "Enter 4 to display your shoe collection." << endl;
     cout << "Enter 5 to save your shoe collection to a file." << endl;
     cout << "Enter 6 to open your shoe collection file." << endl;
     cin >> instr;
+    cin.ignore();
 
+    //Adding a Shoe to you collection
     if (instr == 1)
     {
-        // Temporary variables to add onto your shoe collection 
-        string addName;
-        string addBrand;
+        string addName, addBrand, addColor;
         int addYear;
-        string addColor;
 
-        cout << "Enter the brand of the shoe you want to add to your collection: " << endl;
+        cout << "Enter the brand of the shoe you want to add to your collection: ";
         getline(cin, addBrand);
-        shoeBrand.push_back(addBrand);
-        cout << "Enter the primary color of your " << addBrand << " shoe: " << endl;
+        collection.shoeBrand.push_back(addBrand);
+
+        cout << "Enter the primary color of your " << addBrand << " shoe: ";
         getline(cin, addColor);
-        shoeColor.push_back(addColor);
-        cout << "Enter the numerical value of the year your " << addColor << " " << addBrand << "'s were made: " << endl;
+        collection.shoeColor.push_back(addColor);
+
+        cout << "Enter the numerical value of the year your " << addColor << " " << addBrand << "'s were made: ";
         cin >> addYear;
-        shoeYear.push_back(addYear);
-        cout << "Enter the name of your " << addYear << " " << addColor << " " << addBrand << "'s: " << endl;
+        collection.shoeYear.push_back(addYear);
+        cin.ignore(); // clear newline from input buffer
+
+        cout << "Enter the name of your " << addYear << " " << addColor << " " << addBrand << "'s: ";
         getline(cin, addName);
-        shoeName.push_back(addName);
+        collection.shoeName.push_back(addName);
+
+        cout << "Shoe added to collection!" << endl;
     }
+    // Deleting a shoe from your collection 
     else if (instr == 2)
     {
-        // Temporary variables to delete a shoe from your collection
+    // Temporary variables to delete a shoe from your collection
         string dltName;
         string dltBrand;
         string dltColor;
@@ -65,8 +122,8 @@ int main()
         cout << "Enter the name of your " << dltYear << " " << dltColor << " " << dltBrand << "'s: " << endl;
         getline(cin, dltName);
 
-        // Loop through the shoeBrand array to find the shoe to delete 
-        // and that each variable matches the shoe to delete
+        // Loop to make sure each variable matches the shoe to delete
+        // and that you do not delete the wrong shoe
         for (int i = 0; i < shoeBrand.size(); i++)
         {
             if (shoeBrand[i] == dltBrand && shoeColor[i] == dltColor && shoeYear[i] == dltYear && shoeName[i] == dltName)
@@ -85,6 +142,7 @@ int main()
             }
         }
     }
+    // Searching for a shoe in your collection
     else if (instr == 3)
     {
         string tempName;
@@ -116,6 +174,7 @@ int main()
             }
         }
     }
+    // displaying your shoe collection
     else if (instr == 4)
     {
         // loop through each array and display their values with a tab seperating the variables
@@ -124,47 +183,15 @@ int main()
             cout << shoeBrand[i] << "\t" << shoeColor[i] << "\t" << shoeYear[i] << "\t" << shoeName[i] << endl;
         }
     }
+    // saving your shoe collection
     else if (instr == 5)
     {
-        void saveData(const shoeCollect& userData)
-        {
-            ofstream saveData("userdata.txt");
-            if (outData.is_open())
-            {
-                saveData << userData.shoeBrand << endl;
-                saveData << userData.shoeName << endl;
-                saveData << userData.shoeYear << endl;
-                saveData << userData.shoeColor << endl;
-                saveData.close();
-                cout << "Your shoe collection has been saved." << endl;
-            }
-            else
-            {
-                cout << "Unable to create a file to save your collection." << endl;
-            }
-        }
+        saveData(collection);
     }
+    // deleting your shoe collection
     else if (instr == 6)
     {
-        bool openFile(shoeCollect& userData)
-        {
-            ifstream openData("userdata.txt");
-            if (openData.is_open())
-            {
-                getine(openFile,userData.shoeBrand);
-                getine(openFile,userData.shoeName);
-                getine(openFile,userData.shoeColor);
-                openData >> userData.shoeYear;
-                openData.close();
-                cout << "Your shoe collection file has been opened." << endl;
-                return true;
-            }
-            else
-            {
-                cout << "No data found in file, create a shoe collection!" << endl;
-                return false;
-            }
-        }
+        openFile(collection);
     }
     else
     {
@@ -188,18 +215,24 @@ int main()
 
         if (action == 1)
         {
-            cout << "Enter the brand of the shoe you want to add to your collection: " << endl;
+            cout << "Enter the brand of the shoe you want to add to your collection: ";
             getline(cin, addBrand);
-            shoeBrand.push_back(addBrand);
-            cout << "Enter the primary color of your " << addBrand << " shoe: " << endl;
+            collection.shoeBrand.push_back(addBrand);
+
+            cout << "Enter the primary color of your " << addBrand << " shoe: ";
             getline(cin, addColor);
-            shoeColor.push_back(addColor);
-            cout << "Enter the numerical value of the year your " << addColor << " " << addBrand << "'s were made: " << endl;
+            collection.shoeColor.push_back(addColor);
+
+            cout << "Enter the numerical value of the year your " << addColor << " " << addBrand << "'s were made: ";
             cin >> addYear;
-            shoeYear.push_back(addYear);
-            cout << "Enter the name of your " << addYear << " " << addColor << " " << addBrand << "'s: " << endl;
+            collection.shoeYear.push_back(addYear);
+            cin.ignore(); // clear newline from input buffer
+
+            cout << "Enter the name of your " << addYear << " " << addColor << " " << addBrand << "'s: ";
             getline(cin, addName);
-            shoeName.push_back(addName);
+            collection.shoeName.push_back(addName);
+
+            cout << "Shoe added to collection!" << endl;
             cout << "Do you need to perform another action to your shoe collection?" << endl;
             cout << "Enter 'yes' to continue or 0 to exit" << endl;
             cin >> cont
@@ -286,45 +319,11 @@ int main()
         }
         else if (action == 5)
         {
-            void saveData(const shoeCollect& userData)
-            {
-                ofstream saveData("userdata.txt");
-                if (outData.is_open())
-                {
-                    saveData << userData.shoeBrand << endl;
-                    saveData << userData.shoeName << endl;
-                    saveData << userData.shoeYear << endl;
-                    saveData << userData.shoeColor << endl;
-                    saveData.close();
-                    cout << "Your shoe collection has been saved." << endl;
-                }
-                else
-                {
-                    cout << "Unable to create a file to save your collection." << endl;
-                }
-            } 
+            saveData(collection);
         }
         else if (action == 6)
         {
-            bool openFile(shoeCollect& userData)
-            {
-                ifstream openData("userdata.txt");
-                if (openData.is_open())
-                {
-                    getine(openFile,userData.shoeBrand);
-                    getine(openFile,userData.shoeName);
-                    getine(openFile,userData.shoeColor);
-                    openData >> userData.shoeYear;
-                    openData.close();
-                    cout << "Your shoe collection file has been opened." << endl;
-                    return true;
-                }
-                else
-                {
-                    cout << "No data found in file, create a shoe collection!" << endl;
-                    return false;
-                }
-            }
+            openFile(collection);
         }
         else
         {
