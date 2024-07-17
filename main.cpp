@@ -1,31 +1,31 @@
-#include <vector>
-#include <string>
-#include <fstream>
 #include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
 using namespace std;
 
-    // Create multiple vectors to store different shoes with multiple variables 
 class shoeCollect
 {
+public:
     vector<string> shoeBrand;
-    vector<string> shoeColor;   
+    vector<string> shoeColor;
     vector<int> shoeYear;
-    vector<string> shoeName; 
+    vector<string> shoeName;
 };
 
 void saveData(const shoeCollect& userData)
 {
-    ofstream saveData("userdata.txt");
-    if (saveData.is_open())
+    ofstream outData("userdata.txt");
+    if (outData.is_open())
     {
         for (size_t i = 0; i < userData.shoeBrand.size(); ++i)
         {
-            saveData << userData.shoeBrand[i] << endl;
-            saveData << userData.shoeColor[i] << endl;
-            saveData << userData.shoeYear[i] << endl;
-            saveData << userData.shoeName[i] << endl;
+            outData << userData.shoeBrand[i] << endl;
+            outData << userData.shoeColor[i] << endl;
+            outData << userData.shoeYear[i] << endl;
+            outData << userData.shoeName[i] << endl;
         }
-        saveData.close();
+        outData.close();
         cout << "Your shoe collection has been saved." << endl;
     }
     else
@@ -46,7 +46,7 @@ bool openFile(shoeCollect& userData)
             getline(openData, brand);
             getline(openData, color);
             openData >> year;
-            openData.ignore();
+            openData.ignore(); 
             getline(openData, name);
 
             userData.shoeBrand.push_back(brand);
