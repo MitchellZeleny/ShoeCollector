@@ -7,31 +7,34 @@ using namespace std;
 class shoeCollect
 {
 public:
+// Class Variables
     vector<string> shoeBrand;
     vector<string> shoeColor;
     vector<int> shoeYear;
     vector<string> shoeName;
+
+// Constructor
+shoeCollect() = default;
 };
 
-void saveData(const shoeCollect& userData)
+// Saving shoe collection vectors to a file
+void saveData(const shoeCollect& Collection) const
 {
-    ofstream outData("userdata.txt");
-    if (outData.is_open())
+    ofstream outData(Collection);
+    if (!outData)
     {
-        for (size_t i = 0; i < userData.shoeBrand.size(); ++i)
+        cout << "No shoe collection was found, add to it!" << endl;
+    }
+    outData << "Shoe Brand: \n";
+    for (const auto& brand : shoeBrand)
         {
-            outData << userData.shoeBrand[i] << endl;
-            outData << userData.shoeColor[i] << endl;
-            outData << userData.shoeYear[i] << endl;
-            outData << userData.shoeName[i] << endl;
+            outData << name << endl;
         }
-        outData.close();
-        cout << "Your shoe collection has been saved." << endl;
-    }
-    else
-    {
-        cout << "Unable to create a file to save your collection." << endl;
-    }
+    outData << "Shoe Color: \n";
+    for (const auto& color : shoeColor)
+        {
+            outData << name << endl;
+        }
 }
 
 bool openFile(shoeCollect& userData)
