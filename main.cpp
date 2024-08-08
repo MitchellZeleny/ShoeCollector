@@ -6,15 +6,17 @@ using namespace std;
 
 class shoeCollect
 {
-public:
+private:
 // Class Variables
     vector<string> shoeBrand;
     vector<string> shoeColor;
     vector<int> shoeYear;
     vector<string> shoeName;
 
+public:
 // Constructor
-shoeCollect() = default;
+    shoeCollect() = default;
+    bool openData(const string& Collection);
 };
 
 // Saving shoe collection vectors to a file
@@ -48,36 +50,29 @@ void saveData(const shoeCollect& Collection) const
     outData.close();
 }
 
-bool openFile(shoeCollect& userData)
+bool shoeCollection::openData(const string& Collection)
 {
-    ifstream openData("userdata.txt");
-    if (openData.is_open())
+    ifstream file(Collection);
+    if (!file.is_open()) 
     {
-        while (!openData.eof())
-        {
-            string brand, color, name;
-            int year;
-            getline(openData, brand);
-            getline(openData, color);
-            openData >> year;
-            openData.ignore(); 
-            getline(openData, name);
-
-            userData.shoeBrand.push_back(brand);
-            userData.shoeColor.push_back(color);
-            userData.shoeYear.push_back(year);
-            userData.shoeName.push_back(name);
-        }
-        openData.close();
-        cout << "Your shoe collection file has been opened." << endl;
-        return true;
-    }
-    else
-    {
-        cout << "No data found in file, create a shoe collection!" << endl;
+        cout << "No file found, add to your collection and save it." << endl;
         return false;
     }
+    string brand, color, name;
+    int year;
+
+    while (getline(file, brand, ', ') && getline(file, color, ', ') && getline(file, name, ', ') && (file >> year))
+        {
+            file.ignore(numeric_limits<streamsize>::max(), '\n');
+            shoeBrand.push_back(brand);
+            shoeColor.push_back(color);
+            shoeName.push_back(name);
+            shoeYear.push_back(year);
+        }
+    file.close();
+    return true;
 }
+
 
 int main()
 {
