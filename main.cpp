@@ -28,13 +28,24 @@ void saveData(const shoeCollect& Collection) const
     outData << "Shoe Brand: \n";
     for (const auto& brand : shoeBrand)
         {
-            outData << name << endl;
+            outData << brand << endl;
         }
     outData << "Shoe Color: \n";
     for (const auto& color : shoeColor)
         {
+            outData << color << endl;
+        }
+    outData << "Shoe Year: \n";
+    for (const auto& year : shoeYear)
+        {
+            outData << year << endl;
+        }
+    outData << "Shoe Name: \n";
+    for (const auto& name : shoeName)
+        {
             outData << name << endl;
         }
+    outData.close();
 }
 
 bool openFile(shoeCollect& userData)
